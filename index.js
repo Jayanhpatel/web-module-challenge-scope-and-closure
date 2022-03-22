@@ -30,11 +30,14 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+  1a. The counter1 has a return of a function instead of a set value that increases like counter2
   
   2. Which of the two uses a closure? How can you tell?
+  2a. The counter2 refrences a variable that was established outside the scope of the function.
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+  3a.If you needed the count to be used in other functions and generally used to store a value then counter2 would be perferable, while counter1 can stay self-contained to a certain extent.
 */
 
 // counter1 code
@@ -53,8 +56,6 @@ let count = 0;
 function counter2() {
   return count++;
 }
-
-
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
 Use the inning function below to do the following:
   1. Return a random whole number of points between 0 and 2 scored by one team in an inning
@@ -64,8 +65,8 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+   return Math.floor(Math.random()*(2))
 }
 
 
@@ -83,8 +84,17 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(inningCB,numOfInnings){
+  let home =0;
+  let away =0;
+for(let i=0;i<numOfInnings;i++){
+  home = home+ inningCB();
+  away = away+ inningCB();
+}
+return{
+  Home: home,
+  Away: away}
+
 }
 
 
@@ -101,8 +111,12 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningCB) {
+  return{
+    Home: inningCB(),
+    Away: inningCB()
+  }
+
 
 }
 
